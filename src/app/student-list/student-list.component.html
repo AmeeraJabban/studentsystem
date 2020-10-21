@@ -1,0 +1,7 @@
+<h2>My Students</h2>
+<button (click)="onAddClick()">Add</button>
+<div class='student' *ngFor="let Student of StudentList">
+   <app-student-record [student]="Student" (onEdit)="onEditClick(Student)"></app-student-record>
+
+</div>
+
