@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import {Students } from '../dummydata';
 import { StudentModel } from '../modules/student-model';
 import { Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
-@Injectable({
-  providedIn: 'root'
-})
+
+@Injectable()
 export class StudentServiceService {
   
-  constructor() { }
+  constructor(private http: HttpClient) { }
   getstudents(): Observable<StudentModel[]> {
     return of(Students);
   }

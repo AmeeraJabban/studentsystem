@@ -4,23 +4,22 @@
 <form [formGroup]="profileForm" (ngSubmit)="onSubmit(profileForm)">
 <label>
     Name:
-    <input type="text"  [formControl]="name" required>
+    <input type="text"  [formControl]="profileForm.controls.name" required>
 </label>
-<div *ngIf="name.invalid && (name.dirty || name.touched)">
-  <div *ngIf="name.errors.required">
-    Name is required.
-  </div>
-</div>
 <label>
     Age:
-    <input type="number"  [formControl]="Age" required>
+    <input type="number"  [formControl]="profileForm.controls.Age" required>
 </label>
 <label>
     Gender:
-    <input type="text"  [formControl]="gender" required>
+    <input type="text"  [formControl]="profileForm.controls.gender" required>
 </label>
 <button type="submit" [disabled]="!profileForm.valid">
     {{student?.id==null? "Add" : "Update" }}
 </button>
-</form>  
+</form>
+
+
+
+
 

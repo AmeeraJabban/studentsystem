@@ -1,8 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
+import { AppRoutingModule } from './app-routing.module';
+
+
 
 import { SimpleRouteComponent } from './simple-route/simple-route.component';
 import { StudentListComponent } from './student-list/student-list.component';
@@ -20,15 +23,9 @@ import { StudentRecordComponent } from './student-record/student-record.componen
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     ReactiveFormsModule,
-    RouterModule.forRoot([
-      { path: 'simple', component: SimpleRouteComponent },
-      { path: 'studentList', component: StudentListComponent },
-      { path: 'student/:studentID', component: StudentEditComponent },
-      { path: 'student', component: StudentEditComponent },
-
-      
-    ]) 
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
