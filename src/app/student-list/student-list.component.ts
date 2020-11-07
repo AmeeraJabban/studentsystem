@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentServiceService } from '../Services/student-service.service';
-import { StudentModel } from '../modules/student-model';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,18 +10,19 @@ import { Router } from '@angular/router';
 
 })
 export class StudentListComponent implements OnInit {
-  StudentList : StudentModel[];
+  StudentList;
 
-  constructor(private studentsvc: StudentServiceService,
+  constructor(
+    private studentsvc: StudentServiceService,
     private router: Router
     ) { }
   
   getStudents(): void {
     this.studentsvc.getstudents()
-      .subscribe(StudentList => this.StudentList = StudentList);
+      .subscribe(students=>this.StudentList=students);
   }
   onEditClick(student):void {
-    this.router.navigate(['/student/' + student.id]);
+    this.router.navigate(['/student/' + student.ID]);
   }
   onAddClick():void{
     this.router.navigate(['/student']);

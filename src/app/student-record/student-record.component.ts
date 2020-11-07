@@ -8,11 +8,11 @@ import { Output, EventEmitter } from '@angular/core';
   styleUrls: ['./student-record.component.css'],
 })
 export class StudentRecordComponent implements OnInit {
-  @Input() student: StudentModel;
+  @Input() student;
   @Output() onEdit = new EventEmitter();
  
   onEditbtn_Click(){
-    this.onEdit.emit(this.student)
+    this.onEdit.emit(this.student);
   }
   constructor() { }
   ngOnInit(): void {

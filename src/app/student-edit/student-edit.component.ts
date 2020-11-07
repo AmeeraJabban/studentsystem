@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { StudentModel } from '../modules/student-model'
 import { ActivatedRoute ,Router } from '@angular/router';
 import { FormGroup, Validators,FormBuilder} from '@angular/forms';
 import { StudentServiceService} from '../Services/student-service.service';
@@ -11,7 +10,7 @@ import { StudentServiceService} from '../Services/student-service.service';
   providers :[StudentServiceService],
 })
 export class StudentEditComponent implements OnInit {
-  public student: StudentModel;
+  public student;
   public profileForm : FormGroup;
   public id :number; 
   
@@ -23,41 +22,62 @@ export class StudentEditComponent implements OnInit {
       this.createForm();   
     }
   ngOnInit(): void {
-    this.route.params.subscribe(params =>{if ( params['studentID']){
-      this.id= +params['studentID'];
-    }
-  });
-    if (this.id !== 0){
+    this.route.params.subscribe(params =>{
+      if ( params['studentID']){
+        this.id= +params['studentID'];
+      }
+    });
+    if (this.id !== undefined){
       this.getStudent();
     }
   }
   createForm() : void{
     this.profileForm = this.fb.group({
-      name: ['', [Validators.required]],
-      Age:  [0, [Validators.required]],
+      ID:  ['', [Validators.required]],
+      fname: ['', [Validators.required]],
       gender:['', [Validators.required]],    
     });
   }
   getStudent(): void {
     this.StudentService.getstudent(this.id)
-      .subscribe(student => this.student = student);
-      this.profileForm.setValue({ 
-        name :this.student.name,
-        Age :this.student.Age,
-        gender :this.student.Gender,
-      })
+      .subscribe(
+        response => {
+          this.student=response;
+          this.profileForm.setValue({ 
+            ID :this.student.ID,
+            fname :this.student.fname,
+            gender :this.student.gender,
+          })
+        }
+      );
     }
-  onSubmit({ value, valid }: { value: StudentModel, valid: boolean }): void {
+  onSubmit({ value, valid }: { value, valid: boolean }): void {
     if (!valid) {
       return;
     }
-    if (this.student !== null) {
-      this.StudentService.update(value);
-      this.router.navigate(['/studentList']);
+    if (this.student !== undefined) {
+      alert(value.ID);
+      this.StudentService.update(value)
+      .subscribe(
+        response => {
+          this.student=response;
+          this.student.ID=this.id;
+          this.router.navigate(['/studentList']);
+        }, 
+         error => {
+          console.log(error);
+        });
     }
     else {
-      this.StudentService.Add(value);
-      this.router.navigate(['/studentList']);
+      this.StudentService.Add(value)
+      .subscribe(
+        response => {
+          console.log(response);
+          this.router.navigate(['/studentList']);
+        },
+        error => {
+          console.log(error);
+        });
     }
   } 
 }

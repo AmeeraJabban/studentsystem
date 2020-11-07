@@ -1,46 +1,26 @@
 import { Injectable } from '@angular/core';
-import {Students } from '../dummydata';
-import { StudentModel } from '../modules/student-model';
 import { Observable, of } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 
 
 @Injectable()
 export class StudentServiceService {
-  
+  private apiServer = 'http://localhost:3000/API/patient';
   constructor(private http: HttpClient) { }
-  getstudents(): Observable<StudentModel[]> {
-    return of(Students);
+ 
+  getstudents():Observable<any>{
+    return this.http.get(this.apiServer);
   }
-  getstudent(id: number): Observable<StudentModel> {
-    return of(Students.find(student => student.id === id));
+  getstudent(id: number):Observable<any>{
+    return this.http.get(`${this.apiServer}/ID/${id}`);
   }
-  Add(Student : StudentModel): Observable<StudentModel>{
-    Student.id=+this.GetMaxID()+1;
-    Students.push(Student);
-    return of(Student);
+  Add(Student):Observable<any>{
+    return this.http.post(`${this.apiServer}/add`,Student);
   }
-  update(Student : StudentModel): Observable<StudentModel> {
-    var index = this.GetIndex(Student.id);
-    Students.splice(index,1,Student);
-    return of(Student);
+  update(Student):Observable<any>{
+    return this.http.put(`${this.apiServer}/Edit`,Student);
   }
-  Delete(id:number): Observable<StudentModel>{
-    var student =this.getstudent(id);
-    var index = this.GetIndex(id);
-    Students.splice(index,1);
-    return student;
-}
-GetIndex=(ID)=>{
-  return Students.findIndex(item=>item.id == ID);
-}
-GetMaxID=()=>{
-  var max=0;
-  for(var i=0;i<Students.length;i++){
-      if(max <= Students[i].id){
-          max=Students[i].id;
-      }
-    }
-  return max;
+  Delete(id:number):Observable<any>{
+    return this.http.delete(`${this.apiServer}/Delete/ID/${id}`);
   }
 }

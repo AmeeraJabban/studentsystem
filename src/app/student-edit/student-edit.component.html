@@ -1,21 +1,17 @@
 <div *ngIf="student">
-<h2>{{student.name | uppercase}} Details:</h2>
+<h2>{{student.fname | uppercase}} Details:</h2>
 </div>
 <form [formGroup]="profileForm" (ngSubmit)="onSubmit(profileForm)">
 <label>
     Name:
-    <input type="text"  [formControl]="profileForm.controls.name" required>
-</label>
-<label>
-    Age:
-    <input type="number"  [formControl]="profileForm.controls.Age" required>
+    <input type="text"  [formControl]="profileForm.controls.fname" required>
 </label>
 <label>
     Gender:
     <input type="text"  [formControl]="profileForm.controls.gender" required>
 </label>
 <button type="submit" [disabled]="!profileForm.valid">
-    {{student?.id==null? "Add" : "Update" }}
+    {{student?.ID==null? "Add" : "Update" }}
 </button>
 </form>
 
