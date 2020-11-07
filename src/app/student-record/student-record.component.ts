@@ -1,7 +1,5 @@
 import { Component, OnInit , Input } from '@angular/core';
-import { StudentModel } from '../modules/student-model';
 import { Output, EventEmitter } from '@angular/core';
-
 @Component({
   selector: 'app-student-record',
   templateUrl: './student-record.component.html',
@@ -9,12 +7,11 @@ import { Output, EventEmitter } from '@angular/core';
 })
 export class StudentRecordComponent implements OnInit {
   @Input() student;
-  @Output() onEdit = new EventEmitter();
- 
-  onEditbtn_Click(){
-    this.onEdit.emit(this.student);
+  @Output() Edit = new EventEmitter();
+  onEditbtn_Click(): void {
+    this.Edit.emit(this.student);
   }
-  constructor() { }
+  constructor(){}
   ngOnInit(): void {
   }
 }

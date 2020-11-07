@@ -6,10 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./simple-route.component.css']
 })
 export class SimpleRouteComponent implements OnInit {
-  name = "Anas";
+  name: 'Anas';
   constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
