@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute , Router } from '@angular/router';
 import { FormGroup, Validators, FormBuilder} from '@angular/forms';
 import { StudentServiceService} from '../Services/student-service.service';
+import {InputTextModule} from 'primeng/inputtext';
+import {ButtonModule} from 'primeng/button';
+
+
 
 
 @Component({
@@ -14,11 +18,12 @@ export class StudentEditComponent implements OnInit {
   public student;
   public profileForm: FormGroup;
   public id: number;
-    constructor(
+  constructor(
     private route: ActivatedRoute,
     private StudentService: StudentServiceService,
     private router: Router,
-    private fb: FormBuilder){
+    private fb: FormBuilder,
+    private BtnModule: ButtonModule){
       this.createForm();
     }
   ngOnInit(): void {

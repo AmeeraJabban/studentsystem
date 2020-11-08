@@ -7,9 +7,9 @@ import { Output, EventEmitter } from '@angular/core';
 })
 export class StudentRecordComponent implements OnInit {
   @Input() student;
-  @Output() Edit = new EventEmitter();
+  @Output() onEdit = new EventEmitter();
   onEditbtn_Click(): void {
-    this.Edit.emit(this.student);
+    this.onEdit.emit(this.student);
   }
   constructor(){}
   ngOnInit(): void {

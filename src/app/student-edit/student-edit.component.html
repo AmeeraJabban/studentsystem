@@ -2,16 +2,20 @@
 <h2>{{student.fname | uppercase}} Details:</h2>
 </div>
 <form [formGroup]="profileForm" (ngSubmit)="onSubmit(profileForm)">
-<label>
-    Name:
-    <input type="text"  [formControl]="profileForm.controls.fname" required>
-</label>
-<label>
-    Gender:
-    <input type="text"  [formControl]="profileForm.controls.gender" required>
-</label>
-<button type="submit" [disabled]="!profileForm.valid">
-    {{student?.ID==null? "Add" : "Update" }}
+
+    <span class="p-float-label">
+      Username :
+
+        <input class="p-inputtext-lg"   [formControl]="profileForm.controls.fname" required type="text" pInputText> 
+    </span>
+
+    <span class="p-float-label">
+       Gender :  
+        <input class="p-inputtext-lg"  [formControl]="profileForm.controls.gender" required type="text" pInputText> 
+    </span>
+
+<button pButton type="submit" label='{{student?.ID==null? "Add" : "Update" }}' [disabled]="!profileForm.valid">
+    
 </button>
 </form>
 
